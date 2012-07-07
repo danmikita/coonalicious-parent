@@ -45,8 +45,8 @@ public class WorldRenderer {
 	}
 
 	private void renderRikki() {
-		TextureRegion keyFrame;
-		switch (world.rikki.state) {
+//		TextureRegion keyFrame;
+//		switch (world.rikki.state) {
 		// case Bob.BOB_STATE_FALL:
 		// keyFrame = Assets.bobFall.getKeyFrame(world.bob.stateTime,
 		// Animation.ANIMATION_LOOPING);
@@ -55,23 +55,48 @@ public class WorldRenderer {
 		// keyFrame = Assets.bobJump.getKeyFrame(world.bob.stateTime,
 		// Animation.ANIMATION_LOOPING);
 		// break;
-		case Rikki.RIKKI_STATE_EAT:
-			if (world.rikki.stateTime < 1)
-				keyFrame = Assets.rikkiEat.getKeyFrame(world.rikki.stateTime,
-						Animation.ANIMATION_LOOPING);
-			else
-				keyFrame = Assets.rikkiRunning.getKeyFrame(world.rikki.stateTime,
-						Animation.ANIMATION_LOOPING);
+//		case Rikki.RIKKI_STATE_EAT:
+//			if (world.rikki.stateTime < 1)
+//				keyFrame = Assets.rikkiEat.getKeyFrame(world.rikki.stateTime,
+//						Animation.ANIMATION_LOOPING);
+//			else
+//				keyFrame = Assets.rikkiRunning.getKeyFrame(world.rikki.stateTime,
+//						Animation.ANIMATION_LOOPING);
+//			break;
+//		case Rikki.RIKKI_STATE_RUNNING:
+//			keyFrame = Assets.rikkiRunning.getKeyFrame(world.rikki.stateTime,
+//					Animation.ANIMATION_LOOPING);
+//		case Rikki.RIKKI_STATE_STANDING:
+//			keyFrame = Assets.rikkiStanding.getKeyFrame(world.rikki.stateTime,
+//					Animation.ANIMATION_LOOPING);
+//		default:
+//			keyFrame = Assets.rikkiRunning.getKeyFrame(world.rikki.stateTime,
+//					Animation.ANIMATION_LOOPING);
+//		}
+		switch (world.rikki.fatness) {
+		case Rikki.SKINNIEST:
+			batch.draw(Assets.skinniest, world.rikki.position.x - 0.5f, world.rikki.position.y - 0.5f, 2.32f, 2);
 			break;
-		case Rikki.RIKKI_STATE_RUNNING:
-			keyFrame = Assets.rikkiRunning.getKeyFrame(world.rikki.stateTime,
-					Animation.ANIMATION_LOOPING);
-		case Rikki.RIKKI_STATE_STANDING:
-			keyFrame = Assets.rikkiStanding.getKeyFrame(world.rikki.stateTime,
-					Animation.ANIMATION_LOOPING);
+		case Rikki.SKINNIER:
+			batch.draw(Assets.skinnier, world.rikki.position.x - 0.5f, world.rikki.position.y - 0.5f, 2.32f, 2);
+			break;
+		case Rikki.SKINNY:
+			batch.draw(Assets.skinny, world.rikki.position.x - 0.5f, world.rikki.position.y - 0.5f, 2.32f, 2);
+			break;
+		case Rikki.NEUTRAL:
+			batch.draw(Assets.neutral, world.rikki.position.x - 0.5f, world.rikki.position.y - 0.5f, 2.32f, 2);
+			break;
+		case Rikki.FAT:
+			batch.draw(Assets.fat, world.rikki.position.x - 0.5f, world.rikki.position.y - 0.5f, 2.32f, 2);
+			break;
+		case Rikki.FATTER:
+			batch.draw(Assets.fatter, world.rikki.position.x - 0.5f, world.rikki.position.y - 0.5f, 2.32f, 2);
+			break;
+		case Rikki.FATTEST:
+			batch.draw(Assets.fattest, world.rikki.position.x - 0.5f, world.rikki.position.y - 0.5f, 2.32f, 2);
+			break;
 		default:
-			keyFrame = Assets.rikkiRunning.getKeyFrame(world.rikki.stateTime,
-					Animation.ANIMATION_LOOPING);
+			batch.draw(Assets.neutral, world.rikki.position.x - 0.5f, world.rikki.position.y - 0.5f, 2.32f, 2);
 		}
 
 		// float side = world.bob.velocity.x < 0 ? -1 : 1;
@@ -79,7 +104,7 @@ public class WorldRenderer {
 		// batch.draw(keyFrame, world.bob.position.x + 0.5f,
 		// world.bob.position.y - 0.5f, side * 2, 2);
 		// else
-		batch.draw(keyFrame, world.rikki.position.x - 0.5f, world.rikki.position.y - 0.5f, 2.32f, 2);
+//		batch.draw(keyFrame, world.rikki.position.x - 0.5f, world.rikki.position.y - 0.5f, 2.32f, 2);
 	}
 
 	private void renderFood() {

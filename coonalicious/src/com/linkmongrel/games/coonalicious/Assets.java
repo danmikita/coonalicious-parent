@@ -67,6 +67,13 @@ public class Assets {
 	public static AtlasRegion broccoli;
 	public static AtlasRegion celery;
 	public static AtlasRegion tofu;
+	public static AtlasRegion skinniest;
+	public static AtlasRegion skinnier;
+	public static AtlasRegion skinny;
+	public static AtlasRegion fat;
+	public static AtlasRegion fatter;
+	public static AtlasRegion fattest;
+	public static AtlasRegion neutral;
 
 	public static Texture loadTexture(String file) {
 		return new Texture(Gdx.files.internal(file));
@@ -91,21 +98,29 @@ public class Assets {
 		pause = new TextureRegion(items, 64, 64, 64, 64);
 
 		myTextures = new TextureAtlas("data/packed.txt");
-		rikkiStanding = new Animation(0.1f,
-				myTextures.findRegion("raccoon_standingdown_mouthclosed_eyes open"),
-				myTextures.findRegion("raccoon_standingdown_mouthclosed_eyes open"),
-				myTextures.findRegion("raccoon_standingdown_mouthclosed_eyes open"),
-				myTextures.findRegion("raccoon_standingdown_mouthclosed_eyes open"));
-		rikkiRunning = new Animation(0.1f,
-				myTextures.findRegion("raccoon_standingdown_mouthclosed_eyes open"),
-				myTextures.findRegion("raccoon_rightpawallup _mouthclosed_eyesopen"),
-				myTextures.findRegion("raccoon_standingdown_mouthclosed_eyes open"),
-				myTextures.findRegion("raccoon_leftpawallup _mouthclosed_eyesopen"));
-		rikkiEat = new Animation(0.1f,
-				myTextures.findRegion("raccoon_standing_mouthopen_eyesopen"),
-				myTextures.findRegion("raccoon_hisrightpawup_mouthopen"),
-				myTextures.findRegion("raccoon_standing_mouthopen_eyesopen"),
-				myTextures.findRegion("raccoon_leftpawallup _mouthclosed_eyesopen"));
+//		rikkiStanding = new Animation(0.1f,
+//				myTextures.findRegion("raccoon_standingdown_mouthclosed_eyes open"),
+//				myTextures.findRegion("raccoon_standingdown_mouthclosed_eyes open"),
+//				myTextures.findRegion("raccoon_standingdown_mouthclosed_eyes open"),
+//				myTextures.findRegion("raccoon_standingdown_mouthclosed_eyes open"));
+//		rikkiRunning = new Animation(0.1f,
+//				myTextures.findRegion("raccoon_standingdown_mouthclosed_eyes open"),
+//				myTextures.findRegion("raccoon_rightpawallup_mouthclosed_eyesopen"),
+//				myTextures.findRegion("raccoon_standingdown_mouthclosed_eyes open"),
+//				myTextures.findRegion("raccoon_leftpawallup_mouthclosed_eyesopen"));
+//		rikkiEat = new Animation(0.1f,
+//				myTextures.findRegion("raccoon_standing_mouthopen_eyesopen"),
+//				myTextures.findRegion("raccoon_hisrightpawup_mouthopen"),
+//				myTextures.findRegion("raccoon_standing_mouthopen_eyesopen"),
+//				myTextures.findRegion("raccoon_leftpawallup_mouthclosed_eyesopen"));
+		
+		skinniest = myTextures.findRegion("skinniest_raccoon");
+		skinnier = myTextures.findRegion("skinnymid_raccoon");
+		skinny = myTextures.findRegion("thin_raccoon");
+		neutral = myTextures.findRegion("raccoon_standingdown_mouthclosed_eyesopen");
+		fat = myTextures.findRegion("chubby_raccoon");
+		fatter = myTextures.findRegion("fattestmid_raccoon");
+		fattest = myTextures.findRegion("fattest_raccoon");
 
 		cake = myTextures.findRegion("cake");
 		burger = myTextures.findRegion("burger");
@@ -127,25 +142,6 @@ public class Assets {
 		broccoli = myTextures.findRegion("broccoli");
 		celery = myTextures.findRegion("celery");
 		tofu = myTextures.findRegion("tofu");
-
-		spring = new TextureRegion(items, 128, 0, 32, 32);
-		castle = new TextureRegion(items, 128, 64, 64, 64);
-		coinAnim = new Animation(0.2f, new TextureRegion(items, 128, 32, 32, 32),
-				new TextureRegion(items, 160, 32, 32, 32),
-				new TextureRegion(items, 192, 32, 32, 32),
-				new TextureRegion(items, 160, 32, 32, 32));
-		bobJump = new Animation(0.2f, new TextureRegion(items, 0, 128, 32, 32), new TextureRegion(
-				items, 32, 128, 32, 32));
-		bobFall = new Animation(0.2f, new TextureRegion(items, 64, 128, 32, 32), new TextureRegion(
-				items, 96, 128, 32, 32));
-		bobHit = new TextureRegion(items, 128, 128, 32, 32);
-		squirrelFly = new Animation(0.2f, new TextureRegion(items, 0, 160, 32, 32),
-				new TextureRegion(items, 32, 160, 32, 32));
-		platform = new TextureRegion(items, 64, 160, 64, 16);
-		brakingPlatform = new Animation(0.2f, new TextureRegion(items, 64, 160, 64, 16),
-				new TextureRegion(items, 64, 176, 64, 16),
-				new TextureRegion(items, 64, 192, 64, 16),
-				new TextureRegion(items, 64, 208, 64, 16));
 
 		font = new BitmapFont(Gdx.files.internal("data/font.fnt"),
 				Gdx.files.internal("data/font.png"), false);

@@ -124,6 +124,22 @@ public class World {
 	}
 
 	private void updateRikki(float deltaTime, float accelX) {
+		if(score <= -75) {
+			rikki.fatness = Rikki.SKINNIEST;
+		} else if(score <= -50) {
+			rikki.fatness = Rikki.SKINNIER;
+		} else if(score <= -25) {
+			rikki.fatness = Rikki.SKINNY;
+		} else if(score >= 75) {
+			rikki.fatness = Rikki.FATTEST;
+		} else if(score >= 50) {
+			rikki.fatness = Rikki.FATTER;
+		} else if(score >= 25) {
+			rikki.fatness = Rikki.FAT;
+		} else {
+			rikki.fatness = Rikki.NEUTRAL;
+		}
+		
 		rikki.velocity.x = -accelX / 10 * Rikki.RIKKI_MOVE_VELOCITY;
 		rikki.update(deltaTime);
 	}

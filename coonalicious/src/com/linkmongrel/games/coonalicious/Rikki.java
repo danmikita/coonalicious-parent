@@ -1,16 +1,25 @@
 package com.linkmongrel.games.coonalicious;
 
 public class Rikki extends DynamicGameObject {
-	public static final int RIKKI_STATE_RUNNING = 1;
+	public static final int RIKKI_STATE_STANDING = 0;
+	public static final int RIKKI_STATE_JUMPING = 1;
+	public static final int RIKKI_STATE_RUNNING = 2;
 	public static final int RIKKI_STATE_EAT = 3;
 	public static final float RIKKI_MOVE_VELOCITY = 20;
 	public static final float RIKKI_JUMP_VELOCITY = 8;
 	public static final float RIKKI_WIDTH = 2;
 	public static final float RIKKI_HEIGHT = 2;
-	public static final int RIKKI_STATE_STANDING = 0;
-	private static final int RIKKI_STATE_JUMPING = 1;
+	
+	public static final int SKINNIEST = -3;
+	public static final int SKINNIER = -2;
+	public static final int SKINNY = -1;
+	public static final int NEUTRAL = 0;
+	public static final int FAT = 1;
+	public static final int FATTER = 2;
+	public static final int FATTEST = 3;
 
 	int state;
+	int fatness = NEUTRAL;
 	float stateTime;
 
 	public Rikki(float x, float y) {
