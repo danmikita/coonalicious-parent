@@ -6,6 +6,6 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="lib" path="/Users/danmikita/dev/coonalicious/coonalicious/libs/gdx.jar" sourcepath="/Coonalicious/libs/gdx-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/gdx-backend-android.jar" sourcepath="libs/gdx-backend-android-sources.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/coonalicious"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Coonalicious"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
