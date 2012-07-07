@@ -11,7 +11,7 @@ import com.badlogic.gdx.Gdx;
 public class Settings {
 	public static boolean soundEnabled = true;
 	public final static int[] highscores = new int[] { 100, 80, 50, 30, 10 };
-	public final static String file = ".superjumper";
+	public final static String file = ".coonalicious";
 
 	public static void load() {
 		BufferedReader in = null;
