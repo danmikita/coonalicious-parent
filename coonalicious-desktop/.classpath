@@ -6,6 +6,6 @@
 	<classpathentry kind="lib" path="libs/gdx-backend-lwjgl.jar" sourcepath="libs/gdx-backend-lwjgl-sources.jar"/>
 	<classpathentry kind="lib" path="libs/gdx-backend-lwjgl-natives.jar"/>
 	<classpathentry kind="lib" path="libs/gdx-natives.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Coonalicious"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/Coonalicious"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

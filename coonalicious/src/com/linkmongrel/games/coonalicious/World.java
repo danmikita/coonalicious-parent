@@ -66,7 +66,8 @@ public class World {
 	private void addNewFood(float deltaTime) {
 		int health = rand.nextInt(100);
 		int item = rand.nextInt(10000);
-		float x = rand.nextFloat() * (WORLD_WIDTH - Food.FOOD_WIDTH) + Food.FOOD_WIDTH / 2;
+		float x = rand.nextFloat() * (WORLD_WIDTH - Food.FOOD_WIDTH)
+				+ Food.FOOD_WIDTH / 2;
 		if (drop) {
 			Food food = new Food(Food.FISH, x, WORLD_HEIGHT);
 			// Unhealthy Food
@@ -138,14 +139,14 @@ public class World {
 			}
 		}
 	}
-	
-//	private void updateClouds (float deltaTime) {
-//		int len = clouds.size();
-//		for (int i = 0; i < len; i++) {
-//			Clouds squirrel = clouds.get(i);
-//			squirrel.update(deltaTime);
-//		}
-//	}
+
+	// private void updateClouds (float deltaTime) {
+	// int len = clouds.size();
+	// for (int i = 0; i < len; i++) {
+	// Clouds squirrel = clouds.get(i);
+	// squirrel.update(deltaTime);
+	// }
+	// }
 
 	private void checkCollisions() {
 		checkFoodCollisions();
@@ -157,7 +158,7 @@ public class World {
 			Food food = this.food.get(i);
 			if (rikki.position.y > food.position.y) {
 				if (OverlapTester.overlapRectangles(rikki.bounds, food.bounds)) {
-					rikki.eat();
+//					rikki.eat();
 					listener.eat();
 					food.eat();
 					score += food.type;

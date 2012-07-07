@@ -123,12 +123,16 @@ public class GameScreen implements Screen {
 
 		if (Gdx.app.getType() == Application.ApplicationType.Android) {
 			world.update(deltaTime, -Gdx.input.getAccelerometerY());
+			if(Gdx.input.justTouched())
+				world.rikki.jump();
 		} else {
 			float accel = 0;
 			if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT))
 				accel = 5f;
 			if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT))
 				accel = -5f;
+			if (Gdx.input.isKeyPressed(Keys.DPAD_UP))
+				world.rikki.jump();
 			world.update(deltaTime, accel);
 		}
 		if (world.score != lastScore) {
