@@ -8,11 +8,11 @@ import com.badlogic.gdx.math.Vector2;
 
 public class World {
 	public interface WorldListener {
-		public void eat();
+		public void jump();
 
 		public void highJump();
 
-		public void hit();
+		public void eat();
 
 		public void coin();
 	}
@@ -188,5 +188,10 @@ public class World {
 		if (score >= 100 || score <= -100) {
 			state = WORLD_STATE_GAME_OVER;
 		}
+	}
+
+	public void jump() {
+		rikki.jump();
+		listener.jump();
 	}
 }

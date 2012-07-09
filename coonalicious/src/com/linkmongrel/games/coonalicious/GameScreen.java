@@ -41,13 +41,15 @@ public class GameScreen implements Screen {
 		this.game = game;
 
 		state = GAME_READY;
-		guiCam = new OrthographicCamera(Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
-		guiCam.position.set(Gdx.graphics.getHeight() / 2, Gdx.graphics.getWidth() / 2, 0);
+		guiCam = new OrthographicCamera(Gdx.graphics.getHeight(),
+				Gdx.graphics.getWidth());
+		guiCam.position.set(Gdx.graphics.getHeight() / 2,
+				Gdx.graphics.getWidth() / 2, 0);
 		touchPoint = new Vector3();
 		batcher = new SpriteBatch();
 		worldListener = new WorldListener() {
 			@Override
-			public void eat() {
+			public void jump() {
 				Assets.playSound(Assets.jumpSound);
 				Gdx.input.vibrate(70);
 			}
@@ -58,7 +60,7 @@ public class GameScreen implements Screen {
 			}
 
 			@Override
-			public void hit() {
+			public void eat() {
 				Assets.playSound(Assets.hitSound);
 			}
 
@@ -69,8 +71,8 @@ public class GameScreen implements Screen {
 		};
 		world = new World(worldListener);
 		renderer = new WorldRenderer(batcher, world);
-		pauseBounds = new Rectangle(Gdx.graphics.getHeight() - 64, Gdx.graphics.getWidth() - 64,
-				64, 64);
+		pauseBounds = new Rectangle(Gdx.graphics.getHeight() - 64,
+				Gdx.graphics.getWidth() - 64, 64, 64);
 		resumeBounds = new Rectangle((Gdx.graphics.getHeight() / 2) - 96,
 				Gdx.graphics.getWidth() / 2, 192, 36);
 		quitBounds = new Rectangle((Gdx.graphics.getHeight() / 2) - 96,
@@ -112,9 +114,11 @@ public class GameScreen implements Screen {
 
 	private void updateRunning(float deltaTime) {
 		if (Gdx.input.justTouched()) {
-			guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+			guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(),
+					0));
 
-			if (OverlapTester.pointInRectangle(pauseBounds, touchPoint.x, touchPoint.y)) {
+			if (OverlapTester.pointInRectangle(pauseBounds, touchPoint.x,
+					touchPoint.y)) {
 				Assets.playSound(Assets.clickSound);
 				state = GAME_PAUSED;
 				return;
@@ -123,8 +127,10 @@ public class GameScreen implements Screen {
 
 		if (Gdx.app.getType() == Application.ApplicationType.Android) {
 			world.update(deltaTime, -Gdx.input.getAccelerometerY());
-			if(Gdx.input.justTouched())
-				world.rikki.jump();
+			if (Gdx.input.justTouched()) {
+//				world.rikki.jump();
+				world.jump();
+			}
 		} else {
 			float accel = 0;
 			if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT))
@@ -141,10 +147,10 @@ public class GameScreen implements Screen {
 		}
 		if (world.clock != time) {
 			time = world.clock;
-			int minutes = (time/60);
+			int minutes = (time / 60);
 			int seconds = (time % 60);
 			String secondsString;
-			if(seconds < 10)
+			if (seconds < 10)
 				secondsString = "0" + seconds;
 			else
 				secondsString = "" + seconds;
@@ -166,15 +172,18 @@ public class GameScreen implements Screen {
 
 	private void updatePaused() {
 		if (Gdx.input.justTouched()) {
-			guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+			guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(),
+					0));
 
-			if (OverlapTester.pointInRectangle(resumeBounds, touchPoint.x, touchPoint.y)) {
+			if (OverlapTester.pointInRectangle(resumeBounds, touchPoint.x,
+					touchPoint.y)) {
 				Assets.playSound(Assets.clickSound);
 				state = GAME_RUNNING;
 				return;
 			}
 
-			if (OverlapTester.pointInRectangle(quitBounds, touchPoint.x, touchPoint.y)) {
+			if (OverlapTester.pointInRectangle(quitBounds, touchPoint.x,
+					touchPoint.y)) {
 				Assets.playSound(Assets.clickSound);
 				game.setScreen(new MainMenuScreen(game));
 				return;
@@ -233,16 +242,20 @@ public class GameScreen implements Screen {
 	}
 
 	private void presentRunning() {
-//		batcher.draw(Assets.pause, Gdx.graphics.getHeight() - 64, Gdx.graphics.getWidth() - 64, 64,
-//				64);
-		Assets.font.draw(batcher, timeString, Gdx.graphics.getHeight() - 50, Gdx.graphics.getWidth() - 20);
+		// batcher.draw(Assets.pause, Gdx.graphics.getHeight() - 64,
+		// Gdx.graphics.getWidth() - 64, 64,
+		// 64);
+		Assets.font.draw(batcher, timeString, Gdx.graphics.getHeight() - 50,
+				Gdx.graphics.getWidth() - 20);
 		Assets.font.draw(batcher, scoreString, 8, Gdx.graphics.getWidth() - 20);
 	}
 
 	private void presentPaused() {
-		batcher.draw(Assets.pauseMenu, (Gdx.graphics.getHeight() / 2) - 192 / 2,
+		batcher.draw(Assets.pauseMenu,
+				(Gdx.graphics.getHeight() / 2) - 192 / 2,
 				(Gdx.graphics.getWidth() / 2) - 96 / 2, 192, 96);
-		Assets.font.draw(batcher, scoreString, 16, (Gdx.graphics.getWidth() / 2) - 20);
+		Assets.font.draw(batcher, scoreString, 16,
+				(Gdx.graphics.getWidth() / 2) - 20);
 	}
 
 	private void presentLevelEnd() {

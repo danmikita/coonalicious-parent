@@ -43,16 +43,16 @@ public class MainMenuScreen implements Screen {
 				game.setScreen(new GameScreen(game));
 				return;
 			}
-			if (OverlapTester.pointInRectangle(highscoresBounds, touchPoint.x, touchPoint.y)) {
-				Assets.playSound(Assets.clickSound);
-				game.setScreen(new HighscoresScreen(game));
-				return;
-			}
-			if (OverlapTester.pointInRectangle(helpBounds, touchPoint.x, touchPoint.y)) {
-				Assets.playSound(Assets.clickSound);
-				game.setScreen(new HelpScreen(game));
-				return;
-			}
+//			if (OverlapTester.pointInRectangle(highscoresBounds, touchPoint.x, touchPoint.y)) {
+//				Assets.playSound(Assets.clickSound);
+//				game.setScreen(new HighscoresScreen(game));
+//				return;
+//			}
+//			if (OverlapTester.pointInRectangle(helpBounds, touchPoint.x, touchPoint.y)) {
+//				Assets.playSound(Assets.clickSound);
+//				game.setScreen(new HelpScreen(game));
+//				return;
+//			}
 			if (OverlapTester.pointInRectangle(soundBounds, touchPoint.x, touchPoint.y)) {
 				Assets.playSound(Assets.clickSound);
 				Settings.soundEnabled = !Settings.soundEnabled;
