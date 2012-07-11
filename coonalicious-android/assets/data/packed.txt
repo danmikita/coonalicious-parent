@@ -1,0 +1,277 @@
+packed.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+raccoon_hisrightpawhalfup_mouthopen
+  rotate: false
+  xy: 2, 245
+  size: 69, 59
+  orig: 69, 59
+  offset: 0, 35
+  index: -1
+drumstick
+  rotate: false
+  xy: 207, 72
+  size: 55, 50
+  orig: 55, 50
+  offset: 0, 0
+  index: -1
+banana
+  rotate: false
+  xy: 157, 2
+  size: 62, 41
+  orig: 62, 41
+  offset: 0, 0
+  index: -1
+rightcornercloud
+  rotate: false
+  xy: 428, 245
+  size: 24, 7
+  orig: 24, 7
+  offset: 0, 0
+  index: -1
+tofu
+  rotate: false
+  xy: 146, 306
+  size: 35, 30
+  orig: 35, 30
+  offset: 0, 0
+  index: -1
+cookie
+  rotate: false
+  xy: 159, 72
+  size: 46, 50
+  orig: 46, 50
+  offset: 0, 0
+  index: -1
+raccoon_standing_mouthopen_eyesopen
+  rotate: false
+  xy: 286, 245
+  size: 69, 59
+  orig: 69, 59
+  offset: 0, 35
+  index: -1
+raccoon_rightpawallup_mouthclosed_eyesopen
+  rotate: false
+  xy: 215, 245
+  size: 69, 59
+  orig: 69, 59
+  offset: 0, 35
+  index: -1
+raccoon_hisrightpawup_mouthopen
+  rotate: false
+  xy: 73, 245
+  size: 69, 59
+  orig: 69, 59
+  offset: 0, 35
+  index: -1
+egg
+  rotate: false
+  xy: 264, 72
+  size: 18, 23
+  orig: 18, 23
+  offset: 0, 0
+  index: -1
+chubby_raccoon
+  rotate: false
+  xy: 93, 72
+  size: 64, 55
+  orig: 64, 55
+  offset: 0, 2
+  index: -1
+raccoon_bothpawshalfup_mouthclosed_eyesopen
+  rotate: false
+  xy: 170, 153
+  size: 69, 57
+  orig: 69, 57
+  offset: 0, 36
+  index: -1
+raccoon_hisleftpawup_mouthopen
+  rotate: false
+  xy: 383, 153
+  size: 69, 59
+  orig: 69, 59
+  offset: 0, 35
+  index: -1
+broccoli
+  rotate: false
+  xy: 221, 2
+  size: 66, 54
+  orig: 66, 54
+  offset: 7, 9
+  index: -1
+fish
+  rotate: false
+  xy: 2, 153
+  size: 45, 90
+  orig: 45, 90
+  offset: 4, 2
+  index: -1
+tomato
+  rotate: false
+  xy: 183, 306
+  size: 62, 60
+  orig: 62, 60
+  offset: 2, 0
+  index: -1
+skinniest_raccoon
+  rotate: false
+  xy: 454, 245
+  size: 50, 55
+  orig: 50, 55
+  offset: 2, 2
+  index: -1
+leftcornercloud
+  rotate: false
+  xy: 149, 153
+  size: 19, 8
+  orig: 19, 8
+  offset: 0, 0
+  index: -1
+cheese
+  rotate: false
+  xy: 2, 72
+  size: 43, 38
+  orig: 43, 38
+  offset: 0, 0
+  index: -1
+icecream
+  rotate: false
+  xy: 105, 153
+  size: 42, 80
+  orig: 42, 80
+  offset: 0, 0
+  index: -1
+celery
+  rotate: false
+  xy: 428, 2
+  size: 75, 68
+  orig: 75, 68
+  offset: 1, 0
+  index: -1
+fattest_raccoon
+  rotate: false
+  xy: 353, 72
+  size: 71, 58
+  orig: 71, 58
+  offset: 0, 0
+  index: -1
+Raccoon_rightpawallup_mouthopen_eyesopen
+  rotate: false
+  xy: 2, 2
+  size: 69, 59
+  orig: 69, 59
+  offset: 0, 35
+  index: -1
+cake
+  rotate: false
+  xy: 355, 2
+  size: 45, 39
+  orig: 45, 39
+  offset: 0, 0
+  index: -1
+skinnymid_raccoon
+  rotate: false
+  xy: 2, 306
+  size: 54, 55
+  orig: 54, 55
+  offset: 2, 2
+  index: -1
+apple
+  rotate: false
+  xy: 73, 2
+  size: 37, 43
+  orig: 37, 43
+  offset: 0, 0
+  index: -1
+frenchfries
+  rotate: false
+  xy: 49, 153
+  size: 54, 64
+  orig: 54, 64
+  offset: 0, 0
+  index: -1
+chicken
+  rotate: false
+  xy: 47, 72
+  size: 44, 20
+  orig: 44, 20
+  offset: 0, 0
+  index: -1
+raccoon_standingdown_mouthclosed_eyesopen
+  rotate: false
+  xy: 357, 245
+  size: 69, 59
+  orig: 69, 59
+  offset: 0, 35
+  index: -1
+raccoon_leftpawallup_mouthclosed_eyesopen
+  rotate: false
+  xy: 144, 245
+  size: 69, 59
+  orig: 69, 59
+  offset: 0, 35
+  index: -1
+raccoon_hisleftpawhalfup_mouthopen
+  rotate: false
+  xy: 312, 153
+  size: 69, 59
+  orig: 69, 59
+  offset: 0, 35
+  index: -1
+thin_raccoon
+  rotate: false
+  xy: 87, 306
+  size: 57, 55
+  orig: 57, 55
+  offset: 2, 2
+  index: -1
+soda
+  rotate: false
+  xy: 58, 306
+  size: 27, 41
+  orig: 27, 41
+  offset: 0, 0
+  index: -1
+bacon
+  rotate: false
+  xy: 112, 2
+  size: 43, 43
+  orig: 43, 43
+  offset: 0, 0
+  index: -1
+fattestmid_raccoon
+  rotate: false
+  xy: 426, 72
+  size: 66, 55
+  orig: 66, 55
+  offset: 0, 2
+  index: -1
+raccoon_bothpawshalfup_mouthopen
+  rotate: false
+  xy: 241, 153
+  size: 69, 57
+  orig: 69, 57
+  offset: 0, 36
+  index: -1
+burger
+  rotate: false
+  xy: 289, 2
+  size: 64, 38
+  orig: 64, 38
+  offset: 0, 0
+  index: -1
+carrot
+  rotate: false
+  xy: 402, 2
+  size: 24, 59
+  orig: 24, 59
+  offset: 0, 0
+  index: -1
+eggplant
+  rotate: false
+  xy: 284, 72
+  size: 67, 79
+  orig: 67, 79
+  offset: 0, 0
+  index: -1
