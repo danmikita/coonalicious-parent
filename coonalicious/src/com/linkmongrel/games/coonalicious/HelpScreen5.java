@@ -40,7 +40,7 @@ public class HelpScreen5 implements Screen {
 
 			if (OverlapTester.pointInRectangle(nextBounds, touchPoint.x, touchPoint.y)) {
 				Assets.playSound(Assets.clickSound);
-				game.setScreen(new MainMenuScreen(game));
+//				game.setScreen(new MainMenuScreen(game));
 				return;
 			}
 		}

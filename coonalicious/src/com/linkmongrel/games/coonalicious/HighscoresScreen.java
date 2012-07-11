@@ -42,7 +42,7 @@ public class HighscoresScreen implements Screen {
 
 			if (OverlapTester.pointInRectangle(backBounds, touchPoint.x, touchPoint.y)) {
 				Assets.playSound(Assets.clickSound);
-				game.setScreen(new MainMenuScreen(game));
+//				game.setScreen(new MainMenuScreen(game));
 				return;
 			}
 		}
