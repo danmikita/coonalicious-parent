@@ -5,12 +5,18 @@ import com.badlogic.gdx.Screen;
 
 public class Coonalicious extends Game {
 	boolean firstTimeCreate = true;
+	
+	public ScoreloopInterface scoreloop;
+	
+	public Coonalicious(ScoreloopInterface scoreloop) {
+		this.scoreloop = scoreloop;
+	}
 
 	@Override
 	public void create() {
 		Settings.load();
 		Assets.load();
-		setScreen(new MainMenuScreen(this));
+		setScreen(new MainMenuScreen(this, scoreloop));
 	}
 
 	/**

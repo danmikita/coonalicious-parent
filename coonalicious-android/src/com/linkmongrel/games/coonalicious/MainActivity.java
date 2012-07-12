@@ -13,7 +13,7 @@ import com.scoreloop.client.android.ui.ScoreloopManagerSingleton;
 import com.scoreloop.client.android.ui.ShowResultOverlayActivity;
 
 public class MainActivity extends AndroidApplication implements
-		OnScoreSubmitObserver {
+		OnScoreSubmitObserver, ScoreloopInterface {
 
 	private static final int SHOW_RESULT = 0;
 	private static final int POST_SCORE = 1;
@@ -30,9 +30,8 @@ public class MainActivity extends AndroidApplication implements
 		ScoreloopManagerSingleton.init(this, "mJifVdeKX/oFwYGBvrAdfGRb8Z/RQhlSDp+0JajpFLUO2OOBXsluJw==");
 
 		ScoreloopManagerSingleton.get().setOnScoreSubmitObserver(this);
-		OpenScoreloop();
 
-		initialize(new Coonalicious(), cfg);
+		initialize(new Coonalicious(this), cfg);
 	}
 
 	@Override
@@ -85,5 +84,9 @@ public class MainActivity extends AndroidApplication implements
 	public void OpenScoreloop() {
 		startActivity(new Intent(this, EntryScreenActivity.class));
 	}
+	
+	public void DestroyScoreLoop(){
+		   ScoreloopManagerSingleton.destroy();
+		}
 
 }

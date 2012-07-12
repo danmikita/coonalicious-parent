@@ -21,6 +21,7 @@ public class GameScreen implements Screen {
 	static final int GAME_OVER = 4;
 
 	Game game;
+	ScoreloopInterface scoreloop;
 
 	int state;
 	OrthographicCamera guiCam;
@@ -37,8 +38,9 @@ public class GameScreen implements Screen {
 	String scoreString;
 	private String timeString;
 
-	public GameScreen(Game game) {
+	public GameScreen(Game game, ScoreloopInterface scoreloop) {
 		this.game = game;
+		this.scoreloop= scoreloop;
 
 		state = GAME_READY;
 		guiCam = new OrthographicCamera(Gdx.graphics.getHeight(),
@@ -185,7 +187,7 @@ public class GameScreen implements Screen {
 			if (OverlapTester.pointInRectangle(quitBounds, touchPoint.x,
 					touchPoint.y)) {
 				Assets.playSound(Assets.clickSound);
-				game.setScreen(new MainMenuScreen(game));
+				game.setScreen(new MainMenuScreen(game, scoreloop));
 				return;
 			}
 		}
@@ -202,7 +204,7 @@ public class GameScreen implements Screen {
 
 	private void updateGameOver() {
 		if (Gdx.input.justTouched()) {
-			game.setScreen(new MainMenuScreen(game));
+			game.setScreen(new MainMenuScreen(game, scoreloop));
 		}
 	}
 

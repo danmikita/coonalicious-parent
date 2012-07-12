@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector3;
 
 public class MainMenuScreen implements Screen {
 	Game game;
+	ScoreloopInterface scoreloop;
 
 	OrthographicCamera guiCam;
 	SpriteBatch batcher;
@@ -21,8 +22,9 @@ public class MainMenuScreen implements Screen {
 	Rectangle helpBounds;
 	Vector3 touchPoint;
 
-	public MainMenuScreen(Game game) {
+	public MainMenuScreen(Game game, ScoreloopInterface scoreloop) {
 		this.game = game;
+		this.scoreloop = scoreloop;
 
 		guiCam = new OrthographicCamera(Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
 		guiCam.position.set(Gdx.graphics.getHeight() / 2, Gdx.graphics.getWidth() / 2, 0);
@@ -40,7 +42,7 @@ public class MainMenuScreen implements Screen {
 
 			if (OverlapTester.pointInRectangle(playBounds, touchPoint.x, touchPoint.y)) {
 				Assets.playSound(Assets.clickSound);
-				game.setScreen(new GameScreen(game));
+				game.setScreen(new GameScreen(game, scoreloop));
 				return;
 			}
 //			if (OverlapTester.pointInRectangle(highscoresBounds, touchPoint.x, touchPoint.y)) {
@@ -54,12 +56,13 @@ public class MainMenuScreen implements Screen {
 //				return;
 //			}
 			if (OverlapTester.pointInRectangle(soundBounds, touchPoint.x, touchPoint.y)) {
-				Assets.playSound(Assets.clickSound);
-				Settings.soundEnabled = !Settings.soundEnabled;
-				if (Settings.soundEnabled)
-					Assets.music.play();
-				else
-					Assets.music.pause();
+//				Assets.playSound(Assets.clickSound);
+//				Settings.soundEnabled = !Settings.soundEnabled;
+//				if (Settings.soundEnabled)
+//					Assets.music.play();
+//				else
+//					Assets.music.pause();
+				scoreloop.OpenScoreloop();
 			}
 		}
 	}
