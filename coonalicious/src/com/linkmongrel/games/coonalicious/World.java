@@ -36,6 +36,7 @@ public class World {
 	public int clock;
 	public int state;
 	public boolean drop = true;
+	public int dropDecrement;
 
 	public World(WorldListener listener) {
 		this.rikki = new Rikki(7, 1);
@@ -44,18 +45,34 @@ public class World {
 		this.listener = listener;
 		rand = new Random();
 
-		this.score = 0;
+		this.score = 50;
 		this.state = WORLD_STATE_RUNNING;
 	}
 
 	public void update(float deltaTime, float accelX) {
 		timer += deltaTime;
 		halfASecond += deltaTime;
-		if (halfASecond > 0.5f) {
+		dropDecrement = (int) timer / 10;
+		float dropRate;
+		if (dropDecrement >= 30)
+			dropRate = 0.3f;
+		else if (dropDecrement >= 10)
+			dropRate = 0.8f - new Float(new String("0." + dropDecrement));
+		else
+			dropRate = 0.8f - new Float(new String("0.0" + dropDecrement));
+
+		if (halfASecond > dropRate) {
 			drop = true;
 			halfASecond = 0;
 		}
-		clock = (int) timer;
+
+		int t = (int) timer;
+
+		if (t > clock)
+			score = score - 10;
+
+		clock = t;
+
 		updateRikki(deltaTime, accelX);
 		addNewFood(deltaTime);
 		updateFood(deltaTime);
@@ -124,23 +141,28 @@ public class World {
 	}
 
 	private void updateRikki(float deltaTime, float accelX) {
-		if(score <= -75) {
-			rikki.fatness = Rikki.SKINNIEST;
-		} else if(score <= -50) {
-			rikki.fatness = Rikki.SKINNIER;
-		} else if(score <= -25) {
-			rikki.fatness = Rikki.SKINNY;
-		} else if(score >= 75) {
+		float speed = accelX;
+
+		if (score >= 90) {
 			rikki.fatness = Rikki.FATTEST;
-		} else if(score >= 50) {
+		} else if (score >= 80) {
 			rikki.fatness = Rikki.FATTER;
-		} else if(score >= 25) {
+		} else if (score >= 70) {
 			rikki.fatness = Rikki.FAT;
-		} else {
+		} else if (score >= 60) {
 			rikki.fatness = Rikki.NEUTRAL;
+			speed = speed * 0.5f;
+		} else if (score >= 40) {
+			rikki.fatness = Rikki.SKINNY;
+			speed = speed * 0.7f;
+		} else if (score >= 25) {
+			rikki.fatness = Rikki.SKINNIER;
+			speed = speed * 0.9f;
+		} else if (score <= 10) {
+			rikki.fatness = Rikki.SKINNIEST;
 		}
-		
-		rikki.velocity.x = -accelX / 10 * Rikki.RIKKI_MOVE_VELOCITY;
+
+		rikki.velocity.x = -speed / 10 * Rikki.RIKKI_MOVE_VELOCITY;
 		rikki.update(deltaTime);
 	}
 
@@ -174,10 +196,15 @@ public class World {
 			Food food = this.food.get(i);
 			if (rikki.position.y > food.position.y) {
 				if (OverlapTester.overlapRectangles(rikki.bounds, food.bounds)) {
-//					rikki.eat();
+					// rikki.eat();
 					listener.eat();
 					food.eat();
 					score += food.type;
+					if(score > 100)
+						score = 100;
+					if(score < 0)
+						score = 0;
+					
 					break;
 				}
 			}
@@ -185,7 +212,7 @@ public class World {
 	}
 
 	private void checkGameOver() {
-		if (score >= 100 || score <= -100) {
+		if (score <= 0) {
 			state = WORLD_STATE_GAME_OVER;
 		}
 	}

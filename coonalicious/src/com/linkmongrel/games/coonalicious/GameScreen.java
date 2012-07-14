@@ -37,6 +37,7 @@ public class GameScreen implements Screen {
 	int time;
 	String scoreString;
 	private String timeString;
+	private boolean gameOver = true;
 
 	public GameScreen(Game game, ScoreloopInterface scoreloop) {
 		this.game = game;
@@ -91,6 +92,7 @@ public class GameScreen implements Screen {
 
 		switch (state) {
 		case GAME_READY:
+			gameOver = true;
 			updateReady();
 			break;
 		case GAME_RUNNING:
@@ -103,7 +105,10 @@ public class GameScreen implements Screen {
 			updateLevelEnd();
 			break;
 		case GAME_OVER:
+			if(gameOver)
+				scoreloop.OpenScoreloopLeaderboard(time);
 			updateGameOver();
+			gameOver  = false;
 			break;
 		}
 	}
@@ -271,7 +276,7 @@ public class GameScreen implements Screen {
 
 	private void presentGameOver() {
 		batcher.draw(Assets.gameOver, 160 - 160 / 2, 240 - 96 / 2, 160, 96);
-		float scoreWidth = Assets.font.getBounds(scoreString).width;
+		float scoreWidth = Assets.font.getBounds(time+"").width;
 		Assets.font.draw(batcher, scoreString, 160 - scoreWidth / 2, 480 - 20);
 	}
 

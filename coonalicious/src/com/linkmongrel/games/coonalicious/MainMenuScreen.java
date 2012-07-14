@@ -56,13 +56,13 @@ public class MainMenuScreen implements Screen {
 //				return;
 //			}
 			if (OverlapTester.pointInRectangle(soundBounds, touchPoint.x, touchPoint.y)) {
-//				Assets.playSound(Assets.clickSound);
-//				Settings.soundEnabled = !Settings.soundEnabled;
-//				if (Settings.soundEnabled)
-//					Assets.music.play();
-//				else
-//					Assets.music.pause();
-				scoreloop.OpenScoreloop();
+				Assets.playSound(Assets.clickSound);
+				Settings.soundEnabled = !Settings.soundEnabled;
+				if (Settings.soundEnabled)
+					Assets.music.play();
+				else
+					Assets.music.pause();
+//				scoreloop.OpenScoreloop();
 			}
 		}
 	}

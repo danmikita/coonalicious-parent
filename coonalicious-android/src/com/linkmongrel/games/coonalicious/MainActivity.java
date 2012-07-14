@@ -1,12 +1,16 @@
 package com.linkmongrel.games.coonalicious;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.WindowManager;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.scoreloop.client.android.core.model.Score;
 import com.scoreloop.client.android.ui.EntryScreenActivity;
+import com.scoreloop.client.android.ui.LeaderboardsScreenActivity;
 import com.scoreloop.client.android.ui.OnScoreSubmitObserver;
 import com.scoreloop.client.android.ui.PostScoreOverlayActivity;
 import com.scoreloop.client.android.ui.ScoreloopManagerSingleton;
@@ -14,6 +18,9 @@ import com.scoreloop.client.android.ui.ShowResultOverlayActivity;
 
 public class MainActivity extends AndroidApplication implements
 		OnScoreSubmitObserver, ScoreloopInterface {
+
+	Handler uiThread = new Handler();
+	Context appContext;
 
 	private static final int SHOW_RESULT = 0;
 	private static final int POST_SCORE = 1;
@@ -27,8 +34,9 @@ public class MainActivity extends AndroidApplication implements
 		AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
 		cfg.useGL20 = false;
 
-		ScoreloopManagerSingleton.init(this, "mJifVdeKX/oFwYGBvrAdfGRb8Z/RQhlSDp+0JajpFLUO2OOBXsluJw==");
-
+		ScoreloopManagerSingleton.init(this,
+				"mJifVdeKX/oFwYGBvrAdfGRb8Z/RQhlSDp+0JajpFLUO2OOBXsluJw==");
+		
 		ScoreloopManagerSingleton.get().setOnScoreSubmitObserver(this);
 
 		initialize(new Coonalicious(this), cfg);
@@ -46,11 +54,12 @@ public class MainActivity extends AndroidApplication implements
 				new Intent(this, ShowResultOverlayActivity.class), SHOW_RESULT);
 	}
 
-	void SubmitScore(double score) {
+	public void SubmitScore(final double score) {
+		uiThread.post(new Runnable() {
+            public void run() {
 		ScoreloopManagerSingleton.get().onGamePlayEnded((double) score, null);
-		// score is the score you want to update in scoreloop
-		// second argument is for modes and for a basic scoreboard like the one
-		// in the game we did not have any so we pass null
+            }
+		});
 	}
 
 	public void OnActivityResult(int requestCode, int resultCode, Intent data) {
@@ -84,9 +93,32 @@ public class MainActivity extends AndroidApplication implements
 	public void OpenScoreloop() {
 		startActivity(new Intent(this, EntryScreenActivity.class));
 	}
-	
-	public void DestroyScoreLoop(){
-		   ScoreloopManagerSingleton.destroy();
-		}
+
+	public void DestroyScoreLoop() {
+		ScoreloopManagerSingleton.destroy();
+	}
+
+	public void OpenScoreloopLeaderboard(double scoreResult) {
+
+		// create the score object and set the components
+		final Score score = new Score((double) scoreResult, null);
+		score.setMode(null);
+
+		// submit the score
+		uiThread.post(new Runnable() {
+            public void run() {
+            	ScoreloopManagerSingleton.get().onGamePlayEnded(score,
+        				null);
+            }
+		});
+		
+		final Intent intent = new Intent(this, LeaderboardsScreenActivity.class);
+
+		// specify the leaderboard that will open by default
+		intent.putExtra(LeaderboardsScreenActivity.LEADERBOARD,
+				LeaderboardsScreenActivity.LEADERBOARD_LOCAL);
+
+		startActivity(intent);
+	}
 
 }
