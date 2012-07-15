@@ -9,40 +9,35 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
 
 public class HelpScreen3 implements Screen {
 	Game game;
+	ScoreloopInterface scoreloop;
+
 
 	OrthographicCamera guiCam;
 	SpriteBatch batcher;
-	Rectangle nextBounds;
-	Vector3 touchPoint;
 	Texture helpImage;
 	TextureRegion helpRegion;
 
-	public HelpScreen3(Game game) {
+	public HelpScreen3(Game game, ScoreloopInterface scoreloop) {
 		this.game = game;
-
-		guiCam = new OrthographicCamera(320, 480);
-		guiCam.position.set(320 / 2, 480 / 2, 0);
-		nextBounds = new Rectangle(320 - 64, 0, 64, 64);
-		touchPoint = new Vector3();
+		this.scoreloop = scoreloop;
+		
+		guiCam = new OrthographicCamera(Gdx.graphics.getHeight(),
+				Gdx.graphics.getWidth());
+		guiCam.position.set(Gdx.graphics.getHeight() / 2,
+				Gdx.graphics.getWidth() / 2, 0);
 		batcher = new SpriteBatch();
 		helpImage = Assets.loadTexture("data/help3.png");
-		helpRegion = new TextureRegion(helpImage, 0, 0, 320, 480);
+		helpRegion = new TextureRegion(helpImage, 0, 0, 480, 320);
 	}
 
 	public void update(float deltaTime) {
 		if (Gdx.input.justTouched()) {
-			guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-
-			if (OverlapTester.pointInRectangle(nextBounds, touchPoint.x, touchPoint.y)) {
-				Assets.playSound(Assets.clickSound);
-				game.setScreen(new HelpScreen4(game));
-				return;
-			}
+			Assets.playSound(Assets.clickSound);
+			game.setScreen(new GameScreen(game, scoreloop));
+			return;
 		}
 	}
 
@@ -53,12 +48,7 @@ public class HelpScreen3 implements Screen {
 
 		batcher.disableBlending();
 		batcher.begin();
-		batcher.draw(helpRegion, 0, 0, 320, 480);
-		batcher.end();
-
-		batcher.enableBlending();
-		batcher.begin();
-		batcher.draw(Assets.arrow, 320, 0, -64, 64);
+		batcher.draw(helpRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		batcher.end();
 
 		gl.glDisable(GL10.GL_BLEND);

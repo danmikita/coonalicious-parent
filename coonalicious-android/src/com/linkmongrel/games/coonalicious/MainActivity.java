@@ -8,6 +8,7 @@ import android.view.WindowManager;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import com.scoreloop.client.android.core.model.Score;
 import com.scoreloop.client.android.ui.EntryScreenActivity;
 import com.scoreloop.client.android.ui.LeaderboardsScreenActivity;
@@ -21,14 +22,20 @@ public class MainActivity extends AndroidApplication implements
 
 	Handler uiThread = new Handler();
 	Context appContext;
+	GoogleAnalyticsTracker tracker;
 
 	private static final int SHOW_RESULT = 0;
 	private static final int POST_SCORE = 1;
-	private int _submitStatus;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		tracker = GoogleAnalyticsTracker.getInstance();
+
+	    // Start the tracker in manual dispatch mode...
+
+	    tracker.startNewSession("UA-33393425-1", 20, this);
 
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
@@ -38,6 +45,8 @@ public class MainActivity extends AndroidApplication implements
 				"mJifVdeKX/oFwYGBvrAdfGRb8Z/RQhlSDp+0JajpFLUO2OOBXsluJw==");
 		
 		ScoreloopManagerSingleton.get().setOnScoreSubmitObserver(this);
+		
+		tracker.trackPageView("/MainMenuScreen");
 
 		initialize(new Coonalicious(this), cfg);
 	}
@@ -49,7 +58,6 @@ public class MainActivity extends AndroidApplication implements
 	}
 
 	public void onScoreSubmit(int status, Exception error) {
-		_submitStatus = status;
 		startActivityForResult(
 				new Intent(this, ShowResultOverlayActivity.class), SHOW_RESULT);
 	}
@@ -103,20 +111,22 @@ public class MainActivity extends AndroidApplication implements
 		// create the score object and set the components
 		final Score score = new Score((double) scoreResult, null);
 		score.setMode(null);
+		
+		final boolean submitLocallyOnly = false;
 
 		// submit the score
 		uiThread.post(new Runnable() {
             public void run() {
             	ScoreloopManagerSingleton.get().onGamePlayEnded(score,
-        				null);
+            			submitLocallyOnly);
             }
 		});
 		
 		final Intent intent = new Intent(this, LeaderboardsScreenActivity.class);
 
 		// specify the leaderboard that will open by default
-		intent.putExtra(LeaderboardsScreenActivity.LEADERBOARD,
-				LeaderboardsScreenActivity.LEADERBOARD_LOCAL);
+//		intent.putExtra(LeaderboardsScreenActivity.LEADERBOARD,
+//				LeaderboardsScreenActivity.LEADERBOARD_GLOBAL);
 
 		startActivity(intent);
 	}

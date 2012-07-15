@@ -19,34 +19,16 @@ public class Assets {
 	public static TextureAtlas myTextures;
 	public static TextureRegion mainMenu;
 	public static TextureRegion pauseMenu;
-	public static TextureRegion ready;
-	public static TextureRegion gameOver;
-	public static TextureRegion highScoresRegion;
-	public static TextureRegion logo;
-	public static TextureRegion soundOn;
-	public static TextureRegion soundOff;
-	public static TextureRegion arrow;
 	public static TextureRegion pause;
-	public static TextureRegion spring;
-	public static TextureRegion castle;
-	public static Animation coinAnim;
-	public static Animation bobJump;
-	public static Animation bobFall;
-	public static TextureRegion bobHit;
-	public static Animation squirrelFly;
-	public static TextureRegion platform;
-	public static Animation brakingPlatform;
 	public static BitmapFont font;
 	public static Animation rikkiRunning;
 	public static Animation rikkiEat;
 	public static Animation rikkiStanding;
-	public static AtlasRegion fish;
 
 	public static Music music;
 	public static Sound jumpSound;
 	public static Sound highJumpSound;
 	public static Sound hitSound;
-	public static Sound coinSound;
 	public static Sound clickSound;
 	public static AtlasRegion cake;
 	public static AtlasRegion burger;
@@ -58,6 +40,7 @@ public class Assets {
 	public static AtlasRegion soda;
 	public static AtlasRegion cheese;
 	public static AtlasRegion egg;
+	public static AtlasRegion fish;
 	public static AtlasRegion chicken;
 	public static AtlasRegion banana;
 	public static AtlasRegion apple;
@@ -67,6 +50,7 @@ public class Assets {
 	public static AtlasRegion broccoli;
 	public static AtlasRegion celery;
 	public static AtlasRegion tofu;
+	
 	public static AtlasRegion skinniest;
 	public static AtlasRegion skinnier;
 	public static AtlasRegion skinny;
@@ -74,6 +58,14 @@ public class Assets {
 	public static AtlasRegion fatter;
 	public static AtlasRegion fattest;
 	public static AtlasRegion neutral;
+	
+	public static AtlasRegion soundOff;
+	public static AtlasRegion soundOn;
+	public static AtlasRegion play;
+	public static AtlasRegion quit;
+	public static AtlasRegion resume;
+	public static AtlasRegion ready;
+	public static AtlasRegion scoreloop;
 
 	public static Texture loadTexture(String file) {
 		return new Texture(Gdx.files.internal(file));
@@ -88,13 +80,6 @@ public class Assets {
 		items = loadTexture("data/items.png");
 		mainMenu = new TextureRegion(items, 0, 224, 300, 110);
 		pauseMenu = new TextureRegion(items, 224, 128, 192, 96);
-		ready = new TextureRegion(items, 320, 224, 192, 32);
-		gameOver = new TextureRegion(items, 352, 256, 160, 96);
-		highScoresRegion = new TextureRegion(Assets.items, 0, 257, 300, 110 / 3);
-		logo = new TextureRegion(items, 0, 352, 274, 142);
-		soundOff = new TextureRegion(items, 0, 0, 64, 64);
-		soundOn = new TextureRegion(items, 64, 0, 64, 64);
-		arrow = new TextureRegion(items, 0, 64, 64, 64);
 		pause = new TextureRegion(items, 64, 64, 64, 64);
 
 		myTextures = new TextureAtlas("data/packed.txt");
@@ -114,13 +99,21 @@ public class Assets {
 //				myTextures.findRegion("raccoon_standing_mouthopen_eyesopen"),
 //				myTextures.findRegion("raccoon_leftpawallup_mouthclosed_eyesopen"));
 		
-		skinniest = myTextures.findRegion("skinniest_raccoon");
-		skinnier = myTextures.findRegion("skinnymid_raccoon");
-		skinny = myTextures.findRegion("thin_raccoon");
-		neutral = myTextures.findRegion("raccoon_standingdown_mouthclosed_eyesopen");
-		fat = myTextures.findRegion("chubby_raccoon");
-		fatter = myTextures.findRegion("fattestmid_raccoon");
-		fattest = myTextures.findRegion("fattest_raccoon");
+		soundOff = myTextures.findRegion("sound_off");
+		soundOn = myTextures.findRegion("sound_on");
+		quit = myTextures.findRegion("quit");
+		resume = myTextures.findRegion("resume");
+		ready = myTextures.findRegion("ready");
+		play = myTextures.findRegion("play");
+		scoreloop = myTextures.findRegion("SL_badge");
+		
+		skinniest = myTextures.findRegion("skinniest_rikki_neutral_open");
+		skinnier = myTextures.findRegion("skinnier_rikki_neutral_open");
+		skinny = myTextures.findRegion("skinny_rikki_neutral_open");
+		neutral = myTextures.findRegion("rikki_neutral_open");
+		fat = myTextures.findRegion("fat_rikki_neutral_closed");
+		fatter = myTextures.findRegion("fatter_rikki_neutral_closed");
+		fattest = myTextures.findRegion("fattest_rikki_neutral_closed");
 
 		cake = myTextures.findRegion("cake");
 		burger = myTextures.findRegion("burger");
@@ -154,7 +147,6 @@ public class Assets {
 		jumpSound = Gdx.audio.newSound(Gdx.files.internal("data/jump.ogg"));
 		highJumpSound = Gdx.audio.newSound(Gdx.files.internal("data/highjump.ogg"));
 		hitSound = Gdx.audio.newSound(Gdx.files.internal("data/hit.ogg"));
-		coinSound = Gdx.audio.newSound(Gdx.files.internal("data/coin.ogg"));
 		clickSound = Gdx.audio.newSound(Gdx.files.internal("data/click.ogg"));
 	}
 

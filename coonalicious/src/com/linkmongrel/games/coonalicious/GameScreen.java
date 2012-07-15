@@ -41,7 +41,7 @@ public class GameScreen implements Screen {
 
 	public GameScreen(Game game, ScoreloopInterface scoreloop) {
 		this.game = game;
-		this.scoreloop= scoreloop;
+		this.scoreloop = scoreloop;
 
 		state = GAME_READY;
 		guiCam = new OrthographicCamera(Gdx.graphics.getHeight(),
@@ -66,20 +66,21 @@ public class GameScreen implements Screen {
 			public void eat() {
 				Assets.playSound(Assets.hitSound);
 			}
-
-			@Override
-			public void coin() {
-				Assets.playSound(Assets.coinSound);
-			}
 		};
 		world = new World(worldListener);
 		renderer = new WorldRenderer(batcher, world);
 		pauseBounds = new Rectangle(Gdx.graphics.getHeight() - 64,
 				Gdx.graphics.getWidth() - 64, 64, 64);
-		resumeBounds = new Rectangle((Gdx.graphics.getHeight() / 2) - 96,
-				Gdx.graphics.getWidth() / 2, 192, 36);
-		quitBounds = new Rectangle((Gdx.graphics.getHeight() / 2) - 96,
-				(Gdx.graphics.getWidth() / 2) - 36, 192, 36);
+		resumeBounds = new Rectangle((Gdx.graphics.getHeight() / 2)
+				- (Gdx.graphics.getHeight() / 6),
+				((Gdx.graphics.getWidth() / 4) * 2.5f),
+				(Gdx.graphics.getHeight() / 3),
+				(Gdx.graphics.getHeight() / 3) * 0.8f);
+		quitBounds = new Rectangle((Gdx.graphics.getHeight() / 2)
+				- (Gdx.graphics.getHeight() / 6),
+				((Gdx.graphics.getWidth() / 4) * 1.5f),
+				(Gdx.graphics.getHeight() / 3),
+				(Gdx.graphics.getHeight() / 3) * 0.8f);
 		lastScore = 0;
 		time = 0;
 		timeString = "0:00";
@@ -105,10 +106,10 @@ public class GameScreen implements Screen {
 			updateLevelEnd();
 			break;
 		case GAME_OVER:
-			if(gameOver)
+			if (gameOver)
 				scoreloop.OpenScoreloopLeaderboard(time);
 			updateGameOver();
-			gameOver  = false;
+			gameOver = false;
 			break;
 		}
 	}
@@ -135,7 +136,6 @@ public class GameScreen implements Screen {
 		if (Gdx.app.getType() == Application.ApplicationType.Android) {
 			world.update(deltaTime, -Gdx.input.getAccelerometerY());
 			if (Gdx.input.justTouched()) {
-//				world.rikki.jump();
 				world.jump();
 			}
 		} else {
@@ -168,12 +168,6 @@ public class GameScreen implements Screen {
 		}
 		if (world.state == World.WORLD_STATE_GAME_OVER) {
 			state = GAME_OVER;
-			if (lastScore >= Settings.highscores[4])
-				scoreString = "NEW HIGHSCORE: " + lastScore;
-			else
-				scoreString = "" + lastScore;
-			Settings.addScore(lastScore);
-			Settings.save();
 		}
 	}
 
@@ -233,9 +227,6 @@ public class GameScreen implements Screen {
 		case GAME_PAUSED:
 			presentPaused();
 			break;
-		case GAME_LEVEL_END:
-			presentLevelEnd();
-			break;
 		case GAME_OVER:
 			presentGameOver();
 			break;
@@ -244,40 +235,43 @@ public class GameScreen implements Screen {
 	}
 
 	private void presentReady() {
-		batcher.draw(Assets.ready, (Gdx.graphics.getHeight() / 2) - 192 / 2,
-				(Gdx.graphics.getWidth() / 2) - 32 / 2, 192, 32);
+		batcher.draw(Assets.ready, (Gdx.graphics.getHeight() / 2)
+				- (Gdx.graphics.getHeight() / 3),
+				((Gdx.graphics.getWidth() / 2)),
+				(Gdx.graphics.getHeight() / 1.5f),
+				(Gdx.graphics.getHeight() / 2) * 0.8f);
 	}
 
 	private void presentRunning() {
-		// batcher.draw(Assets.pause, Gdx.graphics.getHeight() - 64,
-		// Gdx.graphics.getWidth() - 64, 64,
-		// 64);
 		Assets.font.draw(batcher, timeString, Gdx.graphics.getHeight() - 50,
 				Gdx.graphics.getWidth() - 20);
 		Assets.font.draw(batcher, scoreString, 8, Gdx.graphics.getWidth() - 20);
 	}
 
 	private void presentPaused() {
-		batcher.draw(Assets.pauseMenu,
-				(Gdx.graphics.getHeight() / 2) - 192 / 2,
-				(Gdx.graphics.getWidth() / 2) - 96 / 2, 192, 96);
-		Assets.font.draw(batcher, scoreString, 16,
-				(Gdx.graphics.getWidth() / 2) - 20);
-	}
+		batcher.draw(Assets.resume, (Gdx.graphics.getHeight() / 2)
+				- (Gdx.graphics.getHeight() / 6),
+				((Gdx.graphics.getWidth() / 4) * 2.5f),
+				(Gdx.graphics.getHeight() / 3),
+				(Gdx.graphics.getHeight() / 3) * 0.8f);
+		batcher.draw(Assets.quit, (Gdx.graphics.getHeight() / 2)
+				- (Gdx.graphics.getHeight() / 6),
+				((Gdx.graphics.getWidth() / 4) * 1.5f),
+				(Gdx.graphics.getHeight() / 3),
+				(Gdx.graphics.getHeight() / 3) * 0.8f);
 
-	private void presentLevelEnd() {
-		String topText = "the princess is ...";
-		String bottomText = "in another castle!";
-		float topWidth = Assets.font.getBounds(topText).width;
-		float bottomWidth = Assets.font.getBounds(bottomText).width;
-		Assets.font.draw(batcher, topText, 160 - topWidth / 2, 480 - 40);
-		Assets.font.draw(batcher, bottomText, 160 - bottomWidth / 2, 40);
+		// Assets.font.draw(batcher, scoreString, 16,
+		// (Gdx.graphics.getWidth() / 2) - 20);
 	}
 
 	private void presentGameOver() {
-		batcher.draw(Assets.gameOver, 160 - 160 / 2, 240 - 96 / 2, 160, 96);
-		float scoreWidth = Assets.font.getBounds(time+"").width;
-		Assets.font.draw(batcher, scoreString, 160 - scoreWidth / 2, 480 - 20);
+		// batcher.draw(Assets.gameOver, 160 - 160 / 2, 240 - 96 / 2, 160, 96);
+		// float scoreWidth = Assets.font.getBounds(time+"").width;
+		float gameOver = Assets.font.getBounds("GAME OVER").width;
+		Assets.font.draw(batcher, "GAME OVER", (Gdx.graphics.getHeight() / 2)
+				- gameOver / 2, Gdx.graphics.getWidth() - 20);
+		// Assets.font.draw(batcher, scoreString, 160 - scoreWidth / 2, 480 -
+		// 20);
 	}
 
 	@Override

@@ -10,7 +10,7 @@ import com.badlogic.gdx.Gdx;
 
 public class Settings {
 	public static boolean soundEnabled = true;
-	public final static int[] highscores = new int[] { 100, 80, 50, 30, 10 };
+	public static boolean firstPlay = true;
 	public final static String file = ".coonalicious";
 
 	public static void load() {
@@ -18,9 +18,7 @@ public class Settings {
 		try {
 			in = new BufferedReader(new InputStreamReader(Gdx.files.external(file).read()));
 			soundEnabled = Boolean.parseBoolean(in.readLine());
-			for (int i = 0; i < 5; i++) {
-				highscores[i] = Integer.parseInt(in.readLine());
-			}
+			firstPlay  = Boolean.parseBoolean(in.readLine());
 		} catch (Throwable e) {
 			// :( It's ok we have defaults
 		} finally {
@@ -37,27 +35,15 @@ public class Settings {
 		try {
 			out = new BufferedWriter(new OutputStreamWriter(Gdx.files.external(file).write(false)));
 			out.write(Boolean.toString(soundEnabled));
-			for (int i = 0; i < 5; i++) {
-				out.write(Integer.toString(highscores[i]));
-			}
-
+			out.write("\n");
+			out.write(Boolean.toString(firstPlay));
+			out.write("\n");
 		} catch (Throwable e) {
 		} finally {
 			try {
 				if (out != null)
 					out.close();
 			} catch (IOException e) {
-			}
-		}
-	}
-
-	public static void addScore(int score) {
-		for (int i = 0; i < 5; i++) {
-			if (highscores[i] < score) {
-				for (int j = 4; j > i; j--)
-					highscores[j] = highscores[j - 1];
-				highscores[i] = score;
-				break;
 			}
 		}
 	}

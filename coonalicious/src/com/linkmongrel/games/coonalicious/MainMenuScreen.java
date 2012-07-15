@@ -18,6 +18,7 @@ public class MainMenuScreen implements Screen {
 	SpriteBatch batcher;
 	Rectangle soundBounds;
 	Rectangle playBounds;
+	Rectangle scoreloopBounds;
 	Rectangle highscoresBounds;
 	Rectangle helpBounds;
 	Vector3 touchPoint;
@@ -26,43 +27,54 @@ public class MainMenuScreen implements Screen {
 		this.game = game;
 		this.scoreloop = scoreloop;
 
-		guiCam = new OrthographicCamera(Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
-		guiCam.position.set(Gdx.graphics.getHeight() / 2, Gdx.graphics.getWidth() / 2, 0);
+		guiCam = new OrthographicCamera(Gdx.graphics.getHeight(),
+				Gdx.graphics.getWidth());
+		guiCam.position.set(Gdx.graphics.getHeight() / 2,
+				Gdx.graphics.getWidth() / 2, 0);
 		batcher = new SpriteBatch();
-		soundBounds = new Rectangle(0, 0, 64, 64);
-		playBounds = new Rectangle((Gdx.graphics.getHeight() / 4) * 3, Gdx.graphics.getWidth() / 2, (Gdx.graphics.getHeight() / 5), Gdx.graphics.getWidth() / 10);
-//		highscoresBounds = new Rectangle(160 - 150, 200 - 18, 300, 36);
-//		helpBounds = new Rectangle(160 - 150, 200 - 18 - 36, 300, 36);
+		soundBounds = new Rectangle((Gdx.graphics.getHeight() / 4) * 3, 90, 64,
+				73);
+		playBounds = new Rectangle((Gdx.graphics.getHeight() / 4) * 2.65f,
+				Gdx.graphics.getWidth() / 2.5f, (Gdx.graphics.getHeight() / 3),
+				(Gdx.graphics.getWidth() / 6) * 1.67f);
+		scoreloopBounds = new Rectangle((Gdx.graphics.getHeight() / 4) * 3, 20,
+				60, 60);
 		touchPoint = new Vector3();
 	}
 
 	public void update(float deltaTime) {
 		if (Gdx.input.justTouched()) {
-			guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+			guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(),
+					0));
 
-			if (OverlapTester.pointInRectangle(playBounds, touchPoint.x, touchPoint.y)) {
+			if (OverlapTester.pointInRectangle(playBounds, touchPoint.x,
+					touchPoint.y)) {
 				Assets.playSound(Assets.clickSound);
-				game.setScreen(new GameScreen(game, scoreloop));
+				if (Settings.firstPlay == true) {
+					game.setScreen(new HelpScreen(game, scoreloop));
+				} else {
+					game.setScreen(new GameScreen(game, scoreloop));
+					Settings.firstPlay = false;
+				}
 				return;
 			}
-//			if (OverlapTester.pointInRectangle(highscoresBounds, touchPoint.x, touchPoint.y)) {
-//				Assets.playSound(Assets.clickSound);
-//				game.setScreen(new HighscoresScreen(game));
-//				return;
-//			}
-//			if (OverlapTester.pointInRectangle(helpBounds, touchPoint.x, touchPoint.y)) {
-//				Assets.playSound(Assets.clickSound);
-//				game.setScreen(new HelpScreen(game));
-//				return;
-//			}
-			if (OverlapTester.pointInRectangle(soundBounds, touchPoint.x, touchPoint.y)) {
+
+			if (OverlapTester.pointInRectangle(scoreloopBounds, touchPoint.x,
+					touchPoint.y)) {
+				Assets.playSound(Assets.clickSound);
+				scoreloop.OpenScoreloop();
+				return;
+			}
+
+			if (OverlapTester.pointInRectangle(soundBounds, touchPoint.x,
+					touchPoint.y)) {
 				Assets.playSound(Assets.clickSound);
 				Settings.soundEnabled = !Settings.soundEnabled;
 				if (Settings.soundEnabled)
 					Assets.music.play();
 				else
 					Assets.music.pause();
-//				scoreloop.OpenScoreloop();
+				// scoreloop.OpenScoreloop();
 			}
 		}
 	}
@@ -76,14 +88,27 @@ public class MainMenuScreen implements Screen {
 
 		batcher.disableBlending();
 		batcher.begin();
-		batcher.draw(Assets.splashRegion, 0, 0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
+		batcher.draw(Assets.splashRegion, 0, 0, Gdx.graphics.getHeight(),
+				Gdx.graphics.getWidth());
 		batcher.end();
 
 		batcher.enableBlending();
 		batcher.begin();
-//		batcher.draw(Assets.logo, 160 - 274 / 2, 480 - 10 - 142, 274, 142);
-//		batcher.draw(Assets.mainMenu, 10, 200 - 110 / 2, 300, 110);
-		batcher.draw(Settings.soundEnabled ? Assets.soundOn : Assets.soundOff, 0, 0, 64, 64);
+		batcher.draw(Settings.soundEnabled ? Assets.soundOn : Assets.soundOff,
+				(Gdx.graphics.getHeight() / 4) * 3, 90, 64, 73);
+		batcher.end();
+
+		batcher.enableBlending();
+		batcher.begin();
+		batcher.draw(Assets.scoreloop, (Gdx.graphics.getHeight() / 4) * 3, 20,
+				60, 60);
+		batcher.end();
+
+		batcher.enableBlending();
+		batcher.begin();
+		batcher.draw(Assets.play, (Gdx.graphics.getHeight() / 4) * 2.65f,
+				Gdx.graphics.getWidth() / 2.5f, (Gdx.graphics.getHeight() / 3),
+				(Gdx.graphics.getWidth() / 6) * 1.67f);
 		batcher.end();
 	}
 

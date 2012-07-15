@@ -13,8 +13,6 @@ public class World {
 		public void highJump();
 
 		public void eat();
-
-		public void coin();
 	}
 
 	public static final float WORLD_WIDTH = 15;
@@ -26,7 +24,6 @@ public class World {
 
 	public final Rikki rikki;
 	public final List<Food> food;
-	public final List<Clouds> clouds;
 	public final WorldListener listener;
 	public final Random rand;
 	public float timer = 0;
@@ -41,7 +38,6 @@ public class World {
 	public World(WorldListener listener) {
 		this.rikki = new Rikki(7, 1);
 		this.food = new ArrayList<Food>();
-		this.clouds = new ArrayList<Clouds>();
 		this.listener = listener;
 		rand = new Random();
 
@@ -178,14 +174,6 @@ public class World {
 		}
 	}
 
-	// private void updateClouds (float deltaTime) {
-	// int len = clouds.size();
-	// for (int i = 0; i < len; i++) {
-	// Clouds squirrel = clouds.get(i);
-	// squirrel.update(deltaTime);
-	// }
-	// }
-
 	private void checkCollisions() {
 		checkFoodCollisions();
 	}
@@ -200,11 +188,11 @@ public class World {
 					listener.eat();
 					food.eat();
 					score += food.type;
-					if(score > 100)
+					if (score > 100)
 						score = 100;
-					if(score < 0)
+					if (score < 0)
 						score = 0;
-					
+
 					break;
 				}
 			}
