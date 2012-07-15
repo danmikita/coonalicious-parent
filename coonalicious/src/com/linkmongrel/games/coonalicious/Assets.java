@@ -15,11 +15,7 @@ public class Assets {
 	public static Texture splash;
 	public static TextureRegion splashRegion;
 
-	public static Texture items;
 	public static TextureAtlas myTextures;
-	public static TextureRegion mainMenu;
-	public static TextureRegion pauseMenu;
-	public static TextureRegion pause;
 	public static BitmapFont font;
 	public static Animation rikkiRunning;
 	public static Animation rikkiEat;
@@ -76,11 +72,6 @@ public class Assets {
 		backgroundRegion = new TextureRegion(background, 0, 0, 480, 320);
 		splash = loadTexture("data/splash.png");
 		splashRegion = new TextureRegion(splash, 0, 0, 480, 320);
-
-		items = loadTexture("data/items.png");
-		mainMenu = new TextureRegion(items, 0, 224, 300, 110);
-		pauseMenu = new TextureRegion(items, 224, 128, 192, 96);
-		pause = new TextureRegion(items, 64, 64, 64, 64);
 
 		myTextures = new TextureAtlas("data/packed.txt");
 //		rikkiStanding = new Animation(0.1f,
