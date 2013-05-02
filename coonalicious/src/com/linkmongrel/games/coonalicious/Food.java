@@ -29,8 +29,8 @@ public class Food extends DynamicGameObject {
 	public static final int TOFU = 1;
 
 
-
-// Hello WORLD!!!!
+// Hello Jeff!
+// BAM!
 	int type;
 	int state;
 	float stateTime;
