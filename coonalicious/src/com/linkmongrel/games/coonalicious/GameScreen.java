@@ -20,6 +20,9 @@ public class GameScreen implements Screen {
 	static final int GAME_LEVEL_END = 3;
 	static final int GAME_OVER = 4;
 
+
+
+//This is an edit to show the functionality
 	Game game;
 	ScoreloopInterface scoreloop;
 
